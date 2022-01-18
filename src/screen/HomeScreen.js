@@ -8,9 +8,7 @@ const HomeScreen=(props)=>{
     return(
 
         <View style={styles.uiStyles}>
-            <Text>
-                Hi 
-            </Text>
+            
 
             <Button title="UploadImages"
               onPress={()=>props.navigation.navigate('Uploaded')}
