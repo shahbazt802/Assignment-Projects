@@ -14,7 +14,7 @@ import {sha256} from 'react-native-sha256'
 
 
 const UploadImages= ()=>{
-   const [res,setres]=useState([])
+   const [res,setres]=useState("")
    
     
    
@@ -29,6 +29,7 @@ const UploadImages= ()=>{
         console.log(image)
 
         const imgPath=image.path
+        alert('Image upload succesfully')
         imageUpload(imgPath)
 
 
@@ -50,7 +51,7 @@ const UploadImages= ()=>{
          type:'image/jpg'
      })
      sha256(imgPath).then(hash=>{
-        console.log(hash)
+        setres(hash)
     })
 
      
@@ -82,8 +83,11 @@ const UploadImages= ()=>{
 
             <Button title="Pick Images"
              onPress={onSelectImage}/>
-           
-            <Text></Text>
+            <Text style={styles.textstyle}>
+                Sha-256
+            </Text>
+            <Text style={styles.shatext}>
+                {res}            </Text>
             
         </View>
     )
@@ -96,6 +100,17 @@ const styles=StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:'white'
+    }
+    ,
+    textstyle:{
+        marginTop:10,
+        fontSize:20
+
+    },
+    shatext:{
+        
+        margin:20,
+        fontSize:20
     }
 })
 
