@@ -1,9 +1,9 @@
 import React,{useState} from "react";
-import {View,StyleSheet,Text,Button, Alert,Platform} from 'react-native';
- import {launchImageLibrary} from 'react-native-image-picker';
+import {View,StyleSheet,Text,Button} from 'react-native';
+ 
 import ImagePicker from 'react-native-image-crop-picker';
 import axios from "axios";
-import apiRequest from './api/apiRequest'
+
 
 //import ImagePicker from 'react-native-image-picker'
 import {sha256} from 'react-native-sha256'
@@ -15,7 +15,7 @@ import {sha256} from 'react-native-sha256'
 
 const UploadImages= ()=>{
    const [res,setres]=useState("")
-   
+   const myurl='http://localhost:3000/file'
     
    
    
@@ -44,7 +44,8 @@ const UploadImages= ()=>{
 // uploading images
  const imageUpload=   (imgPath)=>{
      const imgData=new FormData()
-     imgData.append({
+     imgData.append('file',{
+         
          uri:imgPath,
          name:'image.png',
          fileName:'image',
@@ -58,15 +59,32 @@ const UploadImages= ()=>{
     
     // api call
 
-     axios({
-         method:'post',
-         url:' http://localhost:3000/file',
-         data:imgData
-     }).then(function (response){
-         console.log('response',JSON.stringify(response.data))
-     }).catch(function (error){
-         console.log("error",error)
-     })
+    //  axios({
+    //      method:'post',
+    //      url:myurl,
+    //      data:imgData,
+    //      headers: { "Content-Type": "multipart/form-data" }
+
+
+    //  }).then(function (response){
+    //      console.log('response',JSON.stringify(response.data))
+    //  }).catch(function (error){
+    //      console.log("error",error)
+    //  })
+
+    let res= fetch(
+        myurl,
+        {
+            method:'post',
+            body:imgData,
+            headers:{'Content-Type': 'multipart/form-data'
+        },
+    }
+
+    )
+
+    let re= res.json()
+    console.log(re)
 
     
 

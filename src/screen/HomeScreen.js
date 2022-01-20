@@ -15,6 +15,10 @@ const HomeScreen=(props)=>{
               
               
               />
+              
+              
+              
+              
         </View>
     )
 }
